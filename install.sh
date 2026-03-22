@@ -10,7 +10,6 @@ PREFIX="openclaw-skill"
 INSTALL_DIR="${SKILLS_DIR:-$HOME/skills}"
 ONLY=""
 
-# Parse args
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --dir) INSTALL_DIR="$2"; shift 2 ;;
@@ -21,46 +20,59 @@ done
 
 mkdir -p "$INSTALL_DIR"
 
-# All available skills
 ALL_SKILLS=(
   agent-browser
   agent-reach
   am-i-hacked
   api-gateway
   atxp-2
+  auto-social-posting
   auto-updater
   automation-workflows
   chrome-cdp
+  chrome-cdp-skill
   cognitive-memory
+  daily-reddit-digest
   data-analyst
   dogfood
   electron
+  exec-resilience
   find-skills
-  firecrawl
   gdrive-uploader
   gog-reauth
   humanizer
-  nano-banana-pro
+  kang_yong_style
+  lesson
+  multi-source-tech-news
   nano-pdf
-  openai-whisper
+  news-aggregator-skill
+  one-click-fb
+  openclaw-auto-updater
   openclaw-backup
   openclaw-control-center
   openclaw-tavily-search
   opennews
+  opennews-mcp
   opentwitter
+  opentwitter-mcp
   proactive-agent
   quota-guardian
   reddit
   second-brain
+  self-improving
+  self-improving-agent
+  self-reflection
+  skill-install-safe
+  skio
   summarize
   tavily
+  tavily-search
   telegram-bot-group-setup
   telegram-send-media
   twitter
-  x-account-analysis
+  xiao_s_style
 )
 
-# Filter if --only specified
 if [ -n "$ONLY" ]; then
   IFS=',' read -ra ALL_SKILLS <<< "$ONLY"
 fi
@@ -86,7 +98,7 @@ for skill in "${ALL_SKILLS[@]}"; do
       echo "✅"
       ((SUCCESS++))
     else
-      echo "❌ (找不到 $repo_url)"
+      echo "❌"
       ((FAIL++))
     fi
   fi
@@ -95,5 +107,5 @@ done
 echo ""
 echo "✅ 成功：$SUCCESS　❌ 失敗：$FAIL"
 echo ""
-echo "🎉 安裝完成！Skills 路徑：$INSTALL_DIR"
-echo "   在 openclaw.json 確認 skills.path 指向 $INSTALL_DIR"
+echo "🎉 完成！Skills 路徑：$INSTALL_DIR"
+echo "   請確認 openclaw.json 的 skills.path 指向 $INSTALL_DIR"
